@@ -65,8 +65,8 @@ resource "azurerm_mssql_database" "test" {
 }
 
 # Dotnet web app
-resource "azurerm_static_site" "example" {
-  name                = "example"
-  resource_group_name = "example"
-  location            = "West Europe"
+resource "azurerm_static_site" "udacity" {
+  name                = "udacity"
+  resource_group_name = data.azurerm_resource_group.udacity.name
+  location            = data.azurerm_resource_group.udacity.location
 }
