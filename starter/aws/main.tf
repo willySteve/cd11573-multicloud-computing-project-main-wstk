@@ -227,6 +227,6 @@ resource "aws_s3_bucket" "example" {
 
 
 # Dynamo table
-data "aws_dynamodb_table" "tableName" {
-  name = "tableName"
+resource "aws_dynamodb_contributor_insights" "test" {
+  table_name = "ExampleTableName"
 }
