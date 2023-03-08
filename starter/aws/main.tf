@@ -90,7 +90,7 @@ resource "aws_security_group" "lb" {
 # load balancer with another name
 resource "aws_lb" "default" {
   name            = "udacity-lb"
-  subnets         = aws_subnet.public[0].id
+  subnets         = aws_subnet.public.id
   security_groups = [aws_security_group.lb.id]
 }
 
