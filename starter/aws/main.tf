@@ -89,14 +89,14 @@ resource "aws_security_group" "lb" {
 
 # load balancer with another name
 resource "aws_lb" "default" {
-  name            = "udacity-lb1"
+  name            = "udacity-lb"
   subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.lb.id]
 }
 
 # load balancer with another name
 resource "aws_lb_target_group" "udacity_app" {
-  name        = "udacity-target-group1"
+  name        = "udacity-target-group"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.default.id
@@ -206,26 +206,15 @@ variable "app_count" {
 
 ####### Your Additions Will Start Here ######
 
-# Terraform modules
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 4.0"
-    }
-  }
-}
-
-
 # Create a VPC
 resource "aws_vpc" "example" {
   cidr_block = "10.0.0.0/16"
 }
 
 # Create S3 bucket
-#resource "aws_s3_bucket" "example" {
-#  bucket = "my-tf-willy-bucket"
-#}
+resource "aws_s3_bucket" "example" {
+  bucket = "my-tf-willy-bucket"
+}
 
 
 # Dynamo table
