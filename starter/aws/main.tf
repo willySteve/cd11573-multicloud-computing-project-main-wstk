@@ -225,10 +225,6 @@ resource "aws_s3_bucket" "example" {
   bucket = "my-tf-willy-bucket"
 }
 
-resource "aws_s3_bucket_acl" "willy_bucket_acl" {
-  bucket = aws_s3_bucket.willy.id
-  acl    = "private"
-}
 
 # Dynamo table
 data "aws_dynamodb_table" "tableName" {
