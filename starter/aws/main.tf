@@ -87,12 +87,14 @@ resource "aws_security_group" "lb" {
   }
 }
 
+# load balancer with another name
 resource "aws_lb" "default" {
   name            = "udacity-lb"
   subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.lb.id]
 }
 
+# load balancer with another name
 resource "aws_lb_target_group" "udacity_app" {
   name        = "udacity-target-group"
   port        = 80
