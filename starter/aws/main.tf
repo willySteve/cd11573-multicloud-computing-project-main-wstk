@@ -221,26 +221,13 @@ resource "aws_vpc" "example" {
 }
 
 # Create S3 bucket
-resource "aws_s3_bucket" "b" {
-  bucket = "s3-website-test.hashicorp.com"
-  acl    = "public-read"
-  policy = file("policy.json")
+resource "aws_s3_bucket" "example" {
+  bucket = "my-tf-willy-bucket"
+}
 
-  website {
-    index_document = "index.html"
-    error_document = "error.html"
-
-    routing_rules = <<EOF
-[{
-    "Condition": {
-        "KeyPrefixEquals": "docs/"
-    },
-    "Redirect": {
-        "ReplaceKeyPrefixWith": "documents/"
-    }
-}]
-EOF
-  }
+resource "aws_s3_bucket_acl" "willy_bucket_acl" {
+  bucket = aws_s3_bucket.willy.id
+  acl    = "private"
 }
 
 # Dynamo table
