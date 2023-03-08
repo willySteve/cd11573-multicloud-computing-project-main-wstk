@@ -31,10 +31,6 @@ resource "azurerm_container_group" "udacity" {
 
 ####### Your Additions Will Start Here ######
 # Azure sql
-provider "azurerm" {
-  features {}
-}
-
 resource "azurerm_storage_account" "example" {
   name                     = "examplesa"
   resource_group_name      = azurerm_resource_group.example.name
