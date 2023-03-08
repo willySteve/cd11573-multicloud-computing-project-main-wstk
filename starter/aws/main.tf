@@ -90,7 +90,7 @@ resource "aws_security_group" "lb" {
 # load balancer with another name
 resource "aws_lb" "default" {
   name            = "udacity-lb"
-  subnets         = aws_subnet.public.*.id
+  subnets         = aws_subnet.public[0].id
   security_groups = [aws_security_group.lb.id]
 }
 
@@ -205,32 +205,6 @@ variable "app_count" {
 }
 
 ####### Your Additions Will Start Here ######
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-}
-
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
-  subnet_id         = aws_subnet.public[0].id
-
-  tags = {
-    Name = "HelloWorld"
-  }
-}
 
 # Create S3 bucket
 resource "aws_s3_bucket" "example" {
