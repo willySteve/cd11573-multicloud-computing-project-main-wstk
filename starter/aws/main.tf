@@ -89,14 +89,14 @@ resource "aws_security_group" "lb" {
 
 # load balancer with another name
 resource "aws_lb" "default" {
-  name            = "udacity-lb"
+  name            = "udacity-lb1"
   subnets         = aws_subnet.public.*.id
   security_groups = [aws_security_group.lb.id]
 }
 
 # load balancer with another name
 resource "aws_lb_target_group" "udacity_app" {
-  name        = "udacity-target-group"
+  name        = "udacity-target-group1"
   port        = 80
   protocol    = "HTTP"
   vpc_id      = aws_vpc.default.id
@@ -223,9 +223,9 @@ resource "aws_vpc" "example" {
 }
 
 # Create S3 bucket
-resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-willy-bucket"
-}
+#resource "aws_s3_bucket" "example" {
+#  bucket = "my-tf-willy-bucket"
+#}
 
 
 # Dynamo table
