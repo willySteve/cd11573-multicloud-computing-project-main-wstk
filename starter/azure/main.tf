@@ -49,24 +49,20 @@ resource "azurerm_mssql_server" "example" {
   administrator_login_password = "4-v3ry-53cr37-p455w0rd"
 }
 
-resource "azurerm_mssql_database" "test" {
-  name           = "acctest-db-d"
-  server_id      = azurerm_mssql_server.example.id
-  collation      = "SQL_Latin1_General_CP1_CI_AS"
-  license_type   = "LicenseIncluded"
-  max_size_gb    = 4
-  read_scale     = true
-  sku_name       = "S0"
-  zone_redundant = true
-
-  tags = {
-    foo = "bar"
-  }
+# Dotnet web app
+resource "azurerm_service_plan" "example" {
+  name                = "example"
+  resource_group_name = data.azurerm_resource_group.udacity.name
+  location            = data.azurerm_resource_group.udacity.location
+  os_type             = "Linux"
+  sku_name            = "P1v2"
 }
 
-# Dotnet web app
-resource "azurerm_static_site" "exampleStaticWeb" {
-  name                = "exampleStaticWeb"
+resource "azurerm_linux_web_app" "example" {
+  name                = "example"
   resource_group_name = data.azurerm_resource_group.udacity.name
-  location            = "West Europe"
+  location            = data.azurerm_resource_group.udacity.location
+  service_plan_id     = azurerm_service_plan.example.id
+
+  site_config {}
 }
